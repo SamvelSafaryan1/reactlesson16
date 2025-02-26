@@ -1,11 +1,18 @@
-import { useState } from 'react'
-import Inputs from '../Inputs/Inputs'
+import { useEffect, useState } from 'react'
+
 import './Todo.css'
 
 function Todo(props){
   let [todos,setTodos] = useState([])
   let [text, setText] = useState('')
   let url = 'https://jsonplaceholder.typicode.com/'
+
+  // useEffect(() => {
+  //   fetch(url + '/todos', {
+  //     method: "GET"
+  //   }).then((res) => res.json())
+  //   .then((res) => setTodos(res))
+  // }, [])
 
   let create = () => {
     fetch(url + '/todos', {
@@ -25,8 +32,7 @@ function Todo(props){
         'content-type': 'application/json'
       }
     }).then((res) => res.json())
-    .then(() => setTodos(todos.filter(todo => todo.id !== id)),
-        setText("")
+    .then((res) => setTodos(todos.filter(todo => todo.id !== id))
     )
   }
 
@@ -42,11 +48,23 @@ function Todo(props){
 
   return(
     <div className="app">
-      <Inputs todos={todos} text={text} 
+      <input value={text} onChange={(e) => setText(e.target.value)}/>
+      <button onClick={create}>add</button>
+      {
+        todos.map((todo) => {
+          return <li key={todo.id}>
+                    <input type={"checkbox"} checked={todo.completed} onChange={() => complited(todo.id)}/>
+                    <span>{todo.title}</span>
+                    <button onClick={() => del(todo?.id)}>delete</button>
+                  </li>
+        })
+      }
+
+      {/* <Inputs todos={todos} text={text} 
       create={create} 
       complited={complited} 
       del={del} 
-      setText={setText}/>
+      setText={setText}/> */}
     </div>
   )
 
