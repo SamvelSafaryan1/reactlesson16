@@ -1,0 +1,26 @@
+div{
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; */
+}
+
+li{
+    width: 167px;
+    height: 40px;
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+span{
+    font-size: 16px;
+}
